@@ -61,13 +61,21 @@ let server=http.createServer((req, res) => {
       res.end(JSON.stringify(Hotgpus));
     });
   }
+  if (pathname === '/collect'){
+    read(GPUs=>{
+      let colgpu=GPUs.filter(item=>item.isCollect===true);
+      res.end(JSON.stringify(colgpu));
+    })
+  }
   if (pathname === '/gpu'){
     let id = parseInt(query.id);
+    let col = query.collect;
     switch (req.method) {
       case 'GET':
         if (id){
             read(function (data) {
               let gpu = data.find(item=>item.GPUId === id);
+              console.log(gpu);
               if (!gpu) gpu={};
               res.end(JSON.stringify(gpu));
             })
@@ -76,6 +84,7 @@ let server=http.createServer((req, res) => {
             res.end(JSON.stringify(data));
           })
         }
+
         break;
       case 'POST':
         let str='';

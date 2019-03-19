@@ -34,6 +34,8 @@
   }
 </script>
 
-<style scoped>
-
+<style scoped lang="less">
+.content{
+  text-align: center;
+}
 </style>

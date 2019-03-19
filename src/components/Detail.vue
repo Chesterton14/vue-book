@@ -6,7 +6,7 @@
       <div>
         <p class="title">
           <span>{{gpu.GPUName}}</span>
-          <i class="iconfont icon-star-line"></i>
+          <i class="iconfont " :class="{'icon-star':isCollect,'icon-star-line':!isCollect}" @click="collect"></i>
         </p>
         <p class="price">￥<span>{{gpu.GPUPrice}}</span>.00</p>
         <label>
@@ -28,7 +28,8 @@
     data() {
       return {
         gpu: {},
-        msg:""
+        msg:"",
+        isCollect:false
       }
     },
     components: {
@@ -46,18 +47,37 @@
     methods: {
       async getGPUData() {
         let {data} = await findGPU(this.gid);
+        //console.log(data);
         this.gpu = data;
+        this.isCollect =data.isCollect;
       },
       async changePrice(){
         let res=await updateGPU(this.gid,this.gpu);
         alert(res.data);
         this.$router.push('/list');
+      },
+      async changeCollect(){
+        let {data} = await updateGPU(this.gid,this.gpu);
+      },
+      collect(){
+        if (this.isCollect === true){
+          this.isCollect = false;
+          this.gpu.isCollect = false;
+          this.changeCollect();
+        }else if(this.isCollect === false) {
+          this.isCollect = true;
+          this.gpu.isCollect = true;
+          this.changeCollect();
+        }
       }
     }
   }
 </script>
 
 <style scoped lang="less">
+  .icon-star{
+    color: yellow;
+  }
   .detail {
     position: absolute;
     top: 0;
