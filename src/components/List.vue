@@ -20,7 +20,7 @@
             </div>
           </router-link>
         </ul>
-        <p style="text-align: center" v-show="hasMore">加载更多</p>
+        <p style="text-align: center" v-show="hasMore" @click="getMoreBtn">加载更多</p>
       </template>
 
     </div>
@@ -68,6 +68,9 @@
             this.pageLimitData();
           }
         }, 50);
+      },
+      getMoreBtn(){
+        this.pageLimitData();
       }
     }
   }
