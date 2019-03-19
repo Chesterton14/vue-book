@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:3000';
+axios.defaults.baseURL = 'http://localhost:4000';
 
 /*//处理请求成功后返回的结果
 axios.interceptors.response.use((res)=>{

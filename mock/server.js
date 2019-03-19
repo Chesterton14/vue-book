@@ -1,7 +1,7 @@
 const http = require('http');
 const fs = require('fs');
 const url = require('url');
-const PORT = 3000;
+const PORT = 4000;
 
 const sliders = require('./sliders');
 
